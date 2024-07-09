@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>🍽️ Recipe Generator</h1>
+    <form id="recipeForm" method="post">
+        <label for="ingredients">Enter ingredients (comma-separated):</label>
+        <input type="text" id="ingredients" name="ingredients" required>
+        
+        <label for="dietary">Dietary Restrictions (optional):</label>
+        <select id="dietary" name="dietary">
+            <option value="">None</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="gluten-free">Gluten-free</option>
+            <option value="dairy-free">Dairy-free</option>
+            <option value="low-carb">Low-carb</option>
+        </select>
+
+        <div class="slider-container">
+            <label for="temperature">Creativity Level:</label>
+            <input type="range" id="temperature" name="temperature" min="0" max="100" value="50" class="slider">
+            <p>Creativity: <span id="temperatureValue"></span>%</p>
+        </div>
+        
+        <input type="submit" value="Generate Recipe">
+    </form>
+    
+    <div id="loading">
+        <div class="spinner"></div>
+        <p>👨‍🍳 Cooking up your recipe...</p>
+    </div>
+    
+    <div id="recipeContainer">
+        <div id="recipeResult">
+            {% if recipe %}
+                {{ recipe|safe }}
+            {% endif %}
+        </div>
+        
+        {% if image_url %}
+        <div id="recipeImage">
+            <img src="{{ image_url }}" alt="Generated recipe image">
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
