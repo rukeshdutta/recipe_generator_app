@@ -36,29 +36,44 @@ openai_api_key = os.getenv('OPENAI_API_KEY')
 #     )
 #     return response['data'][0]['url']
 
-@app.route('/result')
-def result():
-    recipe = session.get('recipe')
-    image_url = session.get('image_url')
-    return render_template('result.html', recipe=recipe, image_url=image_url)
+# @app.route('/result')
+# def result():
+#     recipe = session.get('recipe')
+#     image_url = session.get('image_url')
+#     return render_template('result.html', recipe=recipe, image_url=image_url)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         ingredients = request.form['ingredients']
         dietary = request.form['dietary']
-        cuisine = request.form.get('cuisine','')
         temperature = int(request.form['temperature'])
-        recipe_content = generate_recipe(client, ingredients, dietary, temperature,cuisine)
+        cuisine = request.form.get('cuisine', '')
+        recipe_content = generate_recipe(client, ingredients, dietary, temperature, cuisine)
         formatted_recipe = format_recipe_html(recipe_content)
         
         # Generate image prompt and image
         image_prompt = generate_image_prompt(recipe_content)
-        image_url = generate_image(image_prompt)
+        image_url = None
+        if image_prompt:
+            image_url = generate_image(image_prompt)
+        
+        if image_url is None:
+            image_url = url_for('static', filename='default_food_image.jpg')  # Provide a default image
+        
         session['recipe'] = formatted_recipe
         session['image_url'] = image_url
         return redirect(url_for('result'))
     return render_template('index.html')
+
+@app.route('/result')
+def result():
+    recipe = session.get('recipe')
+    image_url = session.get('image_url')
+    error_message = None
+    if image_url == url_for('static', filename='default_food_image.jpg'):
+        error_message = "Sorry, we couldn't generate an image for this recipe due to API policy restrictions."
+    return render_template('result.html', recipe=recipe, image_url=image_url, error_message=error_message)
 
 if __name__ == '__main__':
     app.run(debug=True)

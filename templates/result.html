@@ -18,6 +18,10 @@
             {% if recipe %}
                 {{ recipe|safe }}
             {% endif %}
+            
+            {% if error_message %}
+            <p class="error-message">{{ error_message }}</p>
+            {% endif %}
         </div>
     </div>
     <a href="{{ url_for('index') }}" class="button">Generate New Recipe</a>
