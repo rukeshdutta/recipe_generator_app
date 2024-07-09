@@ -7,28 +7,34 @@ body {
     padding: 20px;
     background-color: #f4f4f4;
 }
+
 h1 {
     color: #2c3e50;
     text-align: center;
 }
+
 form {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
-input[type="text"], select {
+
+input[type="text"],
+select {
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+
 input[type="submit"] {
     background-color: #34dba6;
     color: white;
@@ -38,14 +44,17 @@ input[type="submit"] {
     cursor: pointer;
     font-size: 16px;
 }
+
 input[type="submit"]:hover {
     background-color: #34dba6;
 }
+
 #loading {
     display: none;
     text-align: center;
     margin-top: 20px;
 }
+
 .spinner {
     border: 4px solid #f3f3f3;
     border-top: 4px solid #34dba6;
@@ -55,13 +64,21 @@ input[type="submit"]:hover {
     animation: spin 1s linear infinite;
     margin: 0 auto;
 }
+
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
+
 .slider-container {
     margin-bottom: 15px;
 }
+
 .slider {
     -webkit-appearance: none;
     width: 100%;
@@ -73,9 +90,11 @@ input[type="submit"]:hover {
     -webkit-transition: .2s;
     transition: opacity .2s;
 }
+
 .slider:hover {
     opacity: 1;
 }
+
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
@@ -85,6 +104,7 @@ input[type="submit"]:hover {
     background: #34dba6;
     cursor: pointer;
 }
+
 .slider::-moz-range-thumb {
     width: 25px;
     height: 25px;
@@ -94,10 +114,7 @@ input[type="submit"]:hover {
 }
 
 #recipeContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 20px;
+    display: flow-root;
 }
 
 #recipeResult {
@@ -113,7 +130,7 @@ input[type="submit"]:hover {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -122,6 +139,49 @@ input[type="submit"]:hover {
     }
 
     #recipeImage {
-        max-width: 100%;
+        float: right;
+        max-width: 40%;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        margin-top: 0;
     }
+}
+
+.button, button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #34dba6;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button:hover, button:hover {
+    background-color: #2ab090;
+}
+.cuisine-btn {
+    font-size: 25px;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background-color: transparent;
+    cursor: pointer;
+    margin: 5px;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+.cuisine-btn:hover {
+    transform: scale(1.2);
+}
+
+.cuisine-btn.selected {
+    border-color: #333;
+    background-color: #34dba6;
+    touch-action: double-tap-zoom;
 }

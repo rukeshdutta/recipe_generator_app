@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id="recipeContainer">
+        {% if image_url %}
+        <div id="recipeImage">
+            <img src="{{ image_url }}" alt="Generated recipe image">
+        </div>
+        {% endif %}
+        
+        <div id="recipeResult">
+            {% if recipe %}
+                {{ recipe|safe }}
+            {% endif %}
+        </div>
+    </div>
+    <a href="{{ url_for('index') }}" class="button">Generate New Recipe</a>
+    <button onclick="window.print()">Save as PDF</button>
+</body>
+</html>

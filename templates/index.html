@@ -21,6 +21,19 @@
             <option value="dairy-free">Dairy-free</option>
             <option value="low-carb">Low-carb</option>
         </select>
+        
+        <div id="cuisines">
+            <label>Cuisine (optional):</label><br>
+            <button type="button" class="cuisine-btn" data-cuisine="Italian" title="Italian">🍝</button>
+            <button type="button" class="cuisine-btn" data-cuisine="Chinese" title="Chinese">🥡</button>
+            <button type="button" class="cuisine-btn" data-cuisine="Mexican" title="Mexican">🌮</button>
+            <button type="button" class="cuisine-btn" data-cuisine="Indian" title="Indian">🍛</button>
+            <button type="button" class="cuisine-btn" data-cuisine="Japanese" title="Japanese">🍱</button>
+            <button type="button" class="cuisine-btn" data-cuisine="Thai" title="Thai">🍲</button>
+            <button type="button" class="cuisine-btn" data-cuisine="Greek" title="Greek">🥙</button>
+            <button type="button" class="cuisine-btn" data-cuisine="French" title="French">🥐</button>
+            <input type="hidden" id="selected-cuisine" name="cuisine" value="">
+        </div>
 
         <div class="slider-container">
             <label for="temperature">Creativity Level:</label>
@@ -36,19 +49,6 @@
         <p>👨‍🍳 Cooking up your recipe...</p>
     </div>
     
-    <div id="recipeContainer">
-        <div id="recipeResult">
-            {% if recipe %}
-                {{ recipe|safe }}
-            {% endif %}
-        </div>
-        
-        {% if image_url %}
-        <div id="recipeImage">
-            <img src="{{ image_url }}" alt="Generated recipe image">
-        </div>
-        {% endif %}
-    </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

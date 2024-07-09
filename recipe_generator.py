@@ -2,11 +2,15 @@
 
 import anthropic
 
-def generate_recipe(client, ingredients, dietary,temperature):
+def generate_recipe(client, ingredients, dietary,temperature,cuisine):
     prompt = f"Generate a recipe using the following ingredients: {ingredients}."
     if dietary:
         prompt += f" The recipe should be {dietary}."
+    if cuisine:
+        prompt += f"Cusine should be {cuisine} style"        
     prompt += " Include title, ingredients list, and step-by-step instructions."
+
+    
 
     system_message = """You are a helpful culinary assistant specialized in creating recipes. Your task is to generate unique and delicious recipes based on user inputs. Follow these guidelines:
 1. Suggest recipes that match the user's specified ingredients, cuisine type, or meal category.
