@@ -59,7 +59,7 @@ def index():
             image_url = generate_image(image_prompt)
         
         if image_url is None:
-            image_url = url_for('static', filename='default_food_image.jpg')  # Provide a default image
+            image_url = url_for('static', filename='default_food_image.png')  # Provide a default image
         
         session['recipe'] = formatted_recipe
         session['image_url'] = image_url
